@@ -1,0 +1,40 @@
+#options-page{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  outline: none;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+/* #sitesDiv{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+} */
+
+#options-page input{
+  margin-bottom: 5px;
+}
+
+#options-page input, #options-page button {
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 25px;
+}
+
+#options-page button{
+  width: 200px;
+  background-color: rebeccapurple;
+  margin-left: 5px;
+  border: 0;
+  color: white;
+}
