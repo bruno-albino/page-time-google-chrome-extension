@@ -2,9 +2,6 @@ let page = document.getElementById('sitesDiv');
 let insertDiv = document.getElementById('insertSiteDiv')
 
 chrome.storage.sync.get('sites', res => {
-  if(!res.sites) {
-    chrome.storage.sync.set({ sites: [] })
-  }
   constructOptions(res.sites)
 
 })
@@ -19,12 +16,12 @@ function constructOptions(sites) {
     button.innerHTML = 'Remover'
     input.type = 'text'
     input.disabled = true
-    input.value = item
+    input.value = item.URL
     
     div.appendChild(input)
     div.appendChild(button)
     
-    button.addEventListener('click', () => removeSite(div, item))
+    button.addEventListener('click', () => removeSite(div, item.URL))
     
     page.appendChild(div);
   }
@@ -46,10 +43,10 @@ function constructOptions(sites) {
 }
 
 
-const removeSite = (div, item) => {
+const removeSite = (div, url) => {
 
   chrome.storage.sync.get(['sites'], result => {
-    const sitesFiltered = result.sites.filter(site => site !== item)
+    const sitesFiltered = result.sites.filter(site => site.URL !== url)
 
     chrome.storage.sync.set({ sites: sitesFiltered })
 
@@ -65,7 +62,10 @@ const appendSite = site => {
 
     const newSites = [
       ...result.sites,
-      site
+      {
+        timer: 0,
+        URL: site
+      }
     ]
 
     chrome.storage.sync.set({ sites: newSites })
@@ -79,7 +79,7 @@ const appendSite = site => {
     newInput.disabled = true
     newInput.setAttribute('value', site)
 
-    newButton.addEventListener('click', () => removeSite(newDiv))
+    newButton.addEventListener('click', () => removeSite(newDiv, site))
     
     newDiv.appendChild(newInput)
     newDiv.appendChild(newButton)

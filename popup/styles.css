@@ -1,0 +1,7 @@
+#main-div{
+    width: 600px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    border: 2px solid black;
+    column-gap: 5px;
+}
